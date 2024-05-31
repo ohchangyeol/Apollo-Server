@@ -1,29 +1,15 @@
-import { ApolloServer, gql } from "apollo-server";
-import { PrismaClient } from "@prisma/client";
-
-const client = new PrismaClient();
-
-const typeDefs = gql`
-  type board {
-    idx       :Int     
-    title     :String
-    content   :String
-    insert_dt :String
-  }
-  type Mutation {
-    deleteBoard(idx : Int) : board
-  }
-  type Query {
-    boards : [board]
-  }
-`
-
-const resolvers = {
-  Query: {
-    boards: async() => await client.board.findMany() ,
-
-  }
-}
+import { ApolloServer} from "apollo-server";
+import {queries} from "./modules/_queries";
+import {mutation} from "./modules/_mutation";
+import { board } from "./modules/board";
+const typeDefs = [
+  queries,
+  mutation,
+  board.typeDefs
+];
+const resolvers = [
+  board.resolvers
+];
 
 const server = new ApolloServer({ typeDefs, resolvers })
 server.listen().then(({ url }) => {

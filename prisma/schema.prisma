@@ -1,6 +1,7 @@
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "darwin"]
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native", "darwin"]
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -10,8 +11,9 @@ datasource db {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model board {
-  idx       Int      @id @default(autoincrement())
-  title     String   @db.VarChar(100)
-  content   String?  @db.Text
-  insert_dt DateTime @default(now()) @db.Timestamp(0)
+  idx       Int       @id @default(autoincrement())
+  title     String    @db.VarChar(100)
+  content   String?   @db.Text
+  insert_dt DateTime  @default(now()) @db.Timestamp(0)
+  update_dt DateTime? @updatedAt @db.Timestamp(0)
 }
