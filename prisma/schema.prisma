@@ -1,7 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
+  previewFeatures = ["fullTextIndex", "fullTextSearch"]
   binaryTargets   = ["native", "darwin"]
-  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -14,6 +14,7 @@ model board {
   idx       Int       @id @default(autoincrement())
   title     String    @db.VarChar(100)
   content   String?   @db.Text
+  category  String?   @db.VarChar(100)
   insert_dt DateTime  @default(now()) @db.Timestamp(0)
   update_dt DateTime? @updatedAt @db.Timestamp(0)
 }
