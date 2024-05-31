@@ -1,6 +1,6 @@
 import { gql } from "apollo-server";
 
-export const mutation = gql`
+const typeDefs = gql`
     type Mutation {
         createBoard ( title     :String,
                     content   :String) : board
@@ -13,4 +13,4 @@ export const mutation = gql`
     }
 `;
 
-// module.exports = typeDefs;
+export default typeDefs ;

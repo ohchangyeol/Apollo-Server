@@ -1,6 +1,6 @@
 import { gql } from "apollo-server";
 
-export const queries = gql`
+const typeDefs = gql`
     type Query {
         boards(title : String) : [board]
 
@@ -8,4 +8,4 @@ export const queries = gql`
     }   
 `;
 
-// module.exports = typeDefs;
+export default typeDefs;

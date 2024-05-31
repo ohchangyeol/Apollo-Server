@@ -54,12 +54,7 @@ const resolvers = {
     }
 }
 
-export const board = {
+export default {
     typeDefs : typeDefs,
     resolvers: resolvers
 }
-// module.exports = {
-//     typeDefs : typeDefs,
-//     resolvers: resolvers
-// }
-

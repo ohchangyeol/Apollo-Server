@@ -1,7 +1,10 @@
 import { ApolloServer} from "apollo-server";
-import {queries} from "./modules/_queries";
-import {mutation} from "./modules/_mutation";
-import { board } from "./modules/board";
+import mutation from "./modules/_mutation.js";
+import queries from "./modules/_queries.js";
+import board from "./modules/board.js";
+
+console.log(board);
+
 const typeDefs = [
   queries,
   mutation,
@@ -11,7 +14,7 @@ const resolvers = [
   board.resolvers
 ];
 
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({ typeDefs , resolvers })
 server.listen().then(({ url }) => {
 console.log(`🚀  Server ready at ${url}`)
 })  
