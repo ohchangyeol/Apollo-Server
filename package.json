@@ -1,0 +1,21 @@
+{
+  "name": "apollo-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "cy950315",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.2"
+  },
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "convert-csv-to-json": "^2.47.0",
+    "graphql": "^16.8.1",
+    "mariadb": "^3.3.0"
+  }
+}
