@@ -1,6 +1,5 @@
-const maria = require('../config/maria');
-const rows = maria.query("select * from todo" , (err,res) => {
-    console.log(err);
-    console.log(res);
-    maria.end();
-});
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient();
+const board  = await prisma.board.findMany();
+console.log(board);
+

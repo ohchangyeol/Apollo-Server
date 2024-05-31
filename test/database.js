@@ -1,4 +1,5 @@
-const csvToJson = require('convert-csv-to-json')
+import { csvToJson } from "convert-csv-to-json";
+// const csvToJson = require('convert-csv-to-json')
 
 const database = {
   teams: [],
