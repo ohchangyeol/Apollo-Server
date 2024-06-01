@@ -17,22 +17,22 @@ const resolvers = {
     /** 조회 */
     Query: {
         boards: async(arent, args, context, info) => await prisma.board.findMany({
-        where: {
-            title: {
-                search: args.title,
+            where: {
+                title: {
+                    search: args.title,
+                },
             },
-        },
-        // 페이징처리
-        skip : args.idx ? 1 : 0, 
-        take : 10,
-        ...(args.idx && {cursor: { idx: args.idx }})
-        }) ,
+            // 페이징처리
+            skip : args.idx ? 1 : 0, 
+            take : 10,
+            ...(args.idx && {cursor: { idx: args.idx }})
+        }),
 
-        board: async(parent, args, context, info) => await prisma.board.findUnique({
+        board:  async(parent, args, context, info) => await prisma.board.findUnique({
             where : {
                 idx : args.idx
             },
-        }) ,
+        }),
     },
     /** 생성, 수정, 삭제 */
     Mutation : {

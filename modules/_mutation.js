@@ -2,9 +2,9 @@ import { gql } from "apollo-server";
 
 const typeDefs = gql`
     type Mutation {
-        createBoard ( title     :String,
-                      content   :String
-                      category : String) : board
+        createBoard (   title     :String,
+                        content   :String
+                        category : String) : board
         
         deleteBoard(idx : Int) : board
 
