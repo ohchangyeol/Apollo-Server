@@ -4,10 +4,12 @@ const prisma = new PrismaClient();
 
 const typeDefs = gql`
     type board {
-        idx       :Int     
-        title     :String
-        content   :String
-        insert_dt :String
+        idx       : Int     
+        title     : String
+        content   : String
+        category  : String
+        insert_dt : String
+        update_dt : String
     }
 `;
 
@@ -15,17 +17,21 @@ const resolvers = {
     /** 조회 */
     Query: {
         boards: async(arent, args, context, info) => await prisma.board.findMany({
-        
-        // where: {
-        //   title: {
-        //     search: args.title,
-        //   },
-        // },
+        where: {
+            title: {
+                search: args.title,
+            },
+        },
+        // 페이징처리
+        skip : args.idx ? 1 : 0, 
+        take : 10,
+        ...(args.idx && {cursor: { idx: args.idx }})
         }) ,
+
         board: async(parent, args, context, info) => await prisma.board.findUnique({
             where : {
                 idx : args.idx
-            }
+            },
         }) ,
     },
     /** 생성, 수정, 삭제 */
@@ -33,7 +39,8 @@ const resolvers = {
         createBoard : async(parent, args, context, info)=> await prisma.board.create({
             data : {
                 title : args.title,
-                content :args.content 
+                content :args.content,
+                category : args.category
             }
         }) ,
         deleteBoard : async(parent, args, context, info) => await prisma.board.delete({
@@ -48,7 +55,6 @@ const resolvers = {
             data: {
                 title : args.title,
                 content :args.content,
-                // update_dt : Date.now()
             }
         })
     }
