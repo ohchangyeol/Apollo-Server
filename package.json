@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon ./test/dbtester.js",
+    "test:db": "nodemon ./test/dbtester.js",
     "start": "nodemon index.js"
   },
   "author": "cy950315",
@@ -16,8 +16,11 @@
   "dependencies": {
     "apollo-server": "^3.13.0",
     "convert-csv-to-json": "^2.47.0",
+    "dotenv": "^16.4.5",
     "graphql": "^16.8.1",
     "mariadb": "^3.3.0",
+    "mybatis-mapper": "^0.8.0",
+    "mysql2": "^3.10.0",
     "prisma": "^5.14.0"
   },
   "type": "module"
