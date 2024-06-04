@@ -7,8 +7,8 @@
 
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv'
-// import createMapper from "../database/index.js";
-// import mybatisMapper from 'mybatis-mapper';
+import createMapper from "../database/mapper/index.js";
+import mybatisMapper from 'mybatis-mapper';
 
 dotenv.config();
 
@@ -27,23 +27,19 @@ const conn = mysql.createPool({
 
 // console.log(__dirname);
 
-// createMapper
+createMapper
 
 
-// const dd = mybatisMapper.getStatement('boardMapper','getBoardList', { language: 'sql', indent: '  ' } );
+const query = mybatisMapper.getStatement('boardMapper','getBoardList', { language: 'sql', indent: '  ' } );
 
-// console.log(dd);
-
-
-
+console.log(query);
 
 const test = async()=>{
     const connnn = await conn.getConnection();
-    const [res] = await connnn.query('select * from board');
+    const [res] = await connnn.query(query);
     connnn.release();
     return res;
 }
-
 
 console.log(await test());
 
