@@ -6,4 +6,7 @@
     <select id="getBoardList">
         select * 
         from board
+        <if test="limit != null and limit != '' and page != null and page != ''">
+            LIMIT ${limit} OFFSET ${page}
+        </if>
     </select>

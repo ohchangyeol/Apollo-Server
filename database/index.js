@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise';
 import createMapper from "./mapper/index.js";
 import dotenv from 'dotenv'
+import mybatisMapper from 'mybatis-mapper';
 
 dotenv.config();
 
@@ -70,3 +71,16 @@ export async function queryWrite(query) {
     }
 }
 
+export function mybatisMappersWithContext(mapperName, queryName , params) {
+    try {
+        if (params) {
+            const result = mybatisMapper.getStatement(mapperName, queryName, params, {language: 'sql', indent: '  '});
+            return result;
+        } else {
+            const result = mybatisMapper.getStatement(mapperName, queryName, {language: 'sql', indent: '  '});
+            return result;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
