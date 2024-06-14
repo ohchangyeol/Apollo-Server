@@ -1,5 +1,4 @@
-import mybatisMapper from 'mybatis-mapper';
-import {queryRead ,mybatisMappersWithContext} from "../database/index.js"
+import {queryRead ,getQuery} from "../database/index.js"
 
 const limit = 10 ,
     page = 1;
@@ -11,8 +10,8 @@ const param = {
 };
 
 // const query = mybatisMapper.getStatement('boardMapper','getBoardList', { language: 'sql', indent: '  ' } );
-// const query = mybatisMappersWithContext('boardMapper','getBoardList');
-const query = mybatisMappersWithContext('boardMapper','getBoardList',param);
+// const query = getQuery('boardMapper','getBoardList');
+const query = getQuery('boardMapper','getBoardList',param);
 
 console.log(param);
 console.log(query);

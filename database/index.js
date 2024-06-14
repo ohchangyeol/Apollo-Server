@@ -5,6 +5,9 @@ import mybatisMapper from 'mybatis-mapper';
 
 dotenv.config();
 
+/**
+ * DB 설정
+ */
 const dbConfig = {
     host : process.env.DB_HOST,
     port : process.env.DB_PORT,
@@ -18,12 +21,21 @@ const dbConfig = {
     maxIdle: process.env.MAX_IDLE,
 }
 
+/**
+ * DB Connection
+ * @returns 
+ */
 function getConnection() {
     const pool = mysql.createPool(dbConfig);
     createMapper; 
     return pool.getConnection();
 }
 
+/**
+ * 읽기 전용 (Selete)
+ * @param {*} query 쿼리 String
+ * @returns 
+ */
 export async function queryRead(query) {
     const client = await getConnection();
 
@@ -47,6 +59,11 @@ export async function queryRead(query) {
     }
 }
 
+/**
+ * 쓰기 전용 (Create, Update, Delete)
+ * @param {*} query 쿼리 string
+ * @returns 
+ */
 export async function queryWrite(query) {
     const client = await getConnection();
     await client.beginTransaction(); // 트랜잭션 시작
@@ -70,8 +87,14 @@ export async function queryWrite(query) {
         client.release();
     }
 }
-
-export function mybatisMappersWithContext(mapperName, queryName , params) {
+/**
+ * Mapper에 Query 조회
+ * @param {*} mapperName 매퍼이름
+ * @param {*} queryName 쿼리 명
+ * @param {*} params 파라메터
+ * @returns 
+ */
+export function getQuery(mapperName, queryName , params) {
     try {
         if (params) {
             const result = mybatisMapper.getStatement(mapperName, queryName, params, {language: 'sql', indent: '  '});
