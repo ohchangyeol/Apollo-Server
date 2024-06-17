@@ -15,7 +15,7 @@ jspm_packages/
 **/metabase.db.trace.db
 **/fineImage
 # Keep environment variables out of version control
-.env
+# .env
 
 # Optional npm cache directory
 .npm
