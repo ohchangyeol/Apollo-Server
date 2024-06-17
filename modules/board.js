@@ -1,6 +1,7 @@
 import { gql } from "apollo-server";
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+// import { PrismaClient } from "@prisma/client";
+// const prisma = new PrismaClient();
+import { boardList, getBoard, saveBoard, deleteBoard, updateBoard } from "../service/boardService.js";
 
 const typeDefs = gql`
     type board {
@@ -16,47 +17,17 @@ const typeDefs = gql`
 const resolvers = {
     /** 조회 */
     Query: {
-        boards: async(arent, args, context, info) => await prisma.board.findMany({
-            where: {
-                title: {
-                    search: args.title,
-                },
-            },
-            // 페이징처리
-            skip : args.idx ? 1 : 0, 
-            take : 10,
-            ...(args.idx && {cursor: { idx: args.idx }})
-        }),
+        boards: async(arent, args, context, info) => await boardList(args),
 
-        board:  async(parent, args, context, info) => await prisma.board.findUnique({
-            where : {
-                idx : args.idx
-            },
-        }),
+        board:  async(parent, args, context, info) => await getBoard(args),
     },
     /** 생성, 수정, 삭제 */
     Mutation : {
-        createBoard : async(parent, args, context, info)=> await prisma.board.create({
-            data : {
-                title : args.title,
-                content :args.content,
-                category : args.category
-            }
-        }) ,
-        deleteBoard : async(parent, args, context, info) => await prisma.board.delete({
-            where : {
-                idx : args.idx
-            }
-        }),
-        updateBoard : async(parent, args, context, info)=> await prisma.board.update({
-            where : {
-                idx : args.idx
-            },
-            data: {
-                title : args.title,
-                content :args.content,
-            }
-        })
+        createBoard : async(parent, args, context, info)=>  await saveBoard(args) ,
+
+        deleteBoard : async(parent, args, context, info) =>  await deleteBoard(args),
+        
+        updateBoard : async(parent, args, context, info)=>  await updateBoard(args)
     }
 }
 

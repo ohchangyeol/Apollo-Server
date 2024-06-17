@@ -6,9 +6,9 @@ const typeDefs = gql`
                         content   :String
                         category : String) : board
         
-        deleteBoard(idx : Int) : board
+        deleteBoard(idx : Int!) : board
 
-        updateBoard (idx : Int,
+        updateBoard (idx : Int!,
                     title : String,
                     content : String) : board
     }
