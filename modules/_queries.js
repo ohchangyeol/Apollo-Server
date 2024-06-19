@@ -1,11 +1,13 @@
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
+    
+
     type Query {
-        boards( idx:Int 
+        boards( idx: Int 
                 page : Int!
                 limit : Int!
-                title : String ) : [board]
+                title : String ) : boardRes
 
         board(idx : Int!) : board
     }   

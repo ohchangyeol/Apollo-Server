@@ -13,14 +13,14 @@ export async function boardList( data ) {
         limit: data.limit
     };
 
-    const countQuery = getQuery(MAPPER_NAME,'getBoardList',param);
+    const countQuery = getQuery(MAPPER_NAME,'getBoardListCount',param);
     const countResult = await queryRead(countQuery);
 
     const query = getQuery(MAPPER_NAME,'getBoardList',param);
     const result = await queryRead(query);
 
     if(countResult.rowCount !== 0){
-        result.total = countResult.rows.total
+        result.total = countResult.rows[0].total
     }
     
     return result;

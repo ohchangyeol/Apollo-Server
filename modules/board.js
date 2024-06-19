@@ -12,6 +12,13 @@ const typeDefs = gql`
         insert_dt : String
         update_dt : String
     }
+
+    type boardRes {
+        error: Boolean
+        rows: [board]
+        rowCount: Int
+        total : Int
+    }
 `;
 
 const resolvers = {

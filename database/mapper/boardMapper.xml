@@ -8,7 +8,7 @@
         FROM board
         WHERE 1=1
         <if test="title != null and title != ''">
-        title = #{title}
+        AND title = #{title}
         </if>
     </select>
 
@@ -18,7 +18,7 @@
         FROM board
         WHERE 1=1
         <if test="title != null and title != ''">
-        title = #{title}
+        AND title = #{title}
         </if>
         <if test="limit != null and limit != '' and page != null and page != ''">
             LIMIT ${limit} OFFSET ${page}
