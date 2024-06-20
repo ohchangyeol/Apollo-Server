@@ -36,9 +36,12 @@ export async function getBoard( data ) {
         idx : data.idx ,
     };
 
-    const query = getQuery(MAPPER_NAME,'getBoard',param);
+    const query = getQuery(MAPPER_NAME,'getBoardDtail',param);
     const result = await queryRead(query);
-
+    
+    if (result.rowCount > 0){
+        return result.rows[0];
+    }
     return result;
 }
 

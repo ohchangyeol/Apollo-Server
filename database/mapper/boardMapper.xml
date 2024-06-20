@@ -8,7 +8,7 @@
         FROM board
         WHERE 1=1
         <if test="title != null and title != ''">
-        AND title = #{title}
+        AND title like CONCAT('%', #{title}, '%')
         </if>
     </select>
 
@@ -18,7 +18,7 @@
         FROM board
         WHERE 1=1
         <if test="title != null and title != ''">
-        AND title = #{title}
+        AND title like CONCAT('%', #{title}, '%')
         </if>
         <if test="limit != null and limit != '' and page != null and page != ''">
             LIMIT ${limit} OFFSET ${page}
@@ -26,14 +26,14 @@
     </select>
 
     <!-- 게시글 상세 조회 -->
-    <select id= "getBoard">
+    <select id="getBoardDtail">
         SELECT * 
         FROM board
         WHERE idx = #{idx}
     </select>
     
     <!-- 게시글 저장 -->
-    <select id= "saveBoard">
+    <select id="saveBoard">
         INSERT INTO board (
             title
             , content
@@ -46,13 +46,13 @@
     </select>
 
     <!-- 게시글 삭제 -->
-    <select id= "deleteBoard">
+    <select id="deleteBoard">
         DELETE FROM board
         WHERE idx = #{idx}
     </select>
     
     <!-- 게시글 수정 -->
-    <select id= "updateBoard">
+    <select id="updateBoard">
         UPDATE board
         SET 
         <if test="title != null and title != ''">
@@ -64,3 +64,5 @@
         
         WHERE idx = #{idx}
     </select>
+
+</mapper>
