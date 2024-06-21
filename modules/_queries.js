@@ -4,12 +4,12 @@ const typeDefs = gql`
     
 
     type Query {
-        boards( idx: Int 
+        boardList( idx: Int 
                 page : Int!
                 limit : Int!
-                title : String ) : boardRes
+                title : String ) : getboardList
 
-        board(idx : Int!) : board
+        board(idx : Int!) : getboardDtail
     }   
 `;
 

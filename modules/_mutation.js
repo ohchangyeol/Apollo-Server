@@ -4,13 +4,13 @@ const typeDefs = gql`
     type Mutation {
         createBoard (   title     :String,
                         content   :String
-                        category : String) : board
+                        category : String) : getMessage
         
-        deleteBoard(idx : Int!) : board
+        deleteBoard(idx : Int!) : getMessage
 
         updateBoard (idx : Int!,
-                    title : String,
-                    content : String) : board
+                    title : String!,
+                    content : String!) : getMessage
     }
 `;
 

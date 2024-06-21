@@ -1,4 +1,5 @@
 import {queryRead ,getQuery} from "../database/index.js"
+import  { RES }  from "../common/message.js";
 
 const MAPPER_NAME = "boardMapper";
 /**
@@ -19,11 +20,19 @@ export async function boardList( data ) {
     const query = getQuery(MAPPER_NAME,'getBoardList',param);
     const result = await queryRead(query);
 
-    if(countResult.rowCount !== 0){
+    if(countResult.rows[0].total > 0){
         result.total = countResult.rows[0].total
+        return {
+            code : RES.SUCCESS.code,
+            message : RES.SUCCESS.message,
+            data : result
+        }
     }
     
-    return result;
+    return {
+        code : RES.FAIL.code,
+        message : RES.FAIL.message
+    };
 }
 
 /**
@@ -40,9 +49,17 @@ export async function getBoard( data ) {
     const result = await queryRead(query);
     
     if (result.rowCount > 0){
-        return result.rows[0];
+        return {
+            code : RES.SUCCESS.code,
+            message : RES.SUCCESS.message,
+            data : result.rows[0]
+        }
     }
-    return result;
+    return {
+        code : RES.FAIL.code,
+        message : RES.FAIL.message,
+        
+    }
 }
 
 /**
@@ -60,7 +77,16 @@ export async function saveBoard( data ) {
     const query = getQuery(MAPPER_NAME,'saveBoard',param);
     const result = await queryRead(query);
 
-    return result;
+    if (result.rowCount > 0){
+        return {
+            code : RES.SUCCESS.code,
+            message : RES.SUCCESS.message,
+        }
+    }
+    return{ 
+        code : RES.FAIL.code,
+        message : RES.FAIL.message
+    };
 
 }
 
@@ -77,7 +103,16 @@ export async function deleteBoard( data ) {
     const query = getQuery(MAPPER_NAME,'deleteBoard',param);
     const result = await queryRead(query);
 
-    return result;
+    if (result.rowCount > 0){
+        return {
+            code : RES.SUCCESS.code,
+            message : RES.SUCCESS.message,
+        }
+    }
+    return{ 
+        code : RES.FAIL.code,
+        message : RES.FAIL.message
+    };
 }
 
 /**
@@ -95,5 +130,14 @@ export async function updateBoard( data ) {
     const query = getQuery(MAPPER_NAME,'updateBoard',param);
     const result = await queryRead(query);
 
-    return result;
+    if (result.rowCount > 0){
+        return {
+            code : RES.SUCCESS.code,
+            message : RES.SUCCESS.message,
+        }
+    }
+    return{ 
+        code : RES.FAIL.code,
+        message : RES.FAIL.message
+    };
 }

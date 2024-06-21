@@ -12,19 +12,38 @@ const typeDefs = gql`
         insert_dt : String
         update_dt : String
     }
-
-    type boardRes {
-        error: Boolean
-        rows: [board]
-        rowCount: Int
-        total : Int
+    """목록 조회"""
+    type getboardList {
+        code: String
+        message: String
+        data: resBoardList
     }
+    """목록 조회 응답"""
+    type resBoardList {
+        rowCount: Int
+        total: Int
+        rows: [board]
+    }
+
+    """상세 조회"""
+    type getboardDtail {
+        code: String
+        message: String
+        data: board
+    }
+    
+    """응답"""
+    type getMessage{
+        code: String
+        message : String
+    }
+
 `;
 
 const resolvers = {
     /** 조회 */
     Query: {
-        boards: async(arent, args, context, info) => await boardList(args),
+        boardList: async(arent, args, context, info) => await boardList(args),
 
         board:  async(parent, args, context, info) => await getBoard(args),
     },
